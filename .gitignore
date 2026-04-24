@@ -22,3 +22,15 @@ lerna-debug.log*
 # temp directory
 .temp
 .tmp
+
+# IDE and editor configs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Claude Code
+.claude/
