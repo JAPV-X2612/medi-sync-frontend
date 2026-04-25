@@ -14,7 +14,11 @@ const currentUser = () => {
   return raw ? JSON.parse(raw) : null;
 };
 
+const isValidPath = (p) => typeof p === "string" && /^\/[\w\-.\/]*$/.test(p);
+const isValidId = (id) => id != null && /^[\w\-.]+$/.test(String(id));
+
 const request = async (path, options = {}) => {
+  if (!isValidPath(path)) throw new Error(`Invalid API path: ${path}`);
   const res = await fetch(`${API_BASE_URL}${path}`, {
     headers: { "Content-Type": "application/json" },
     ...options,
@@ -105,7 +109,7 @@ const api = {
         .map((a) => formatHHMM(a.appointmentTime)),
     );
     const free = Array.from(new Set(grid)).filter((t) => !bookedTimes.has(t));
-    free.sort();
+    free.sort((a, b) => a.localeCompare(b));
     return {
       morning: free.filter((t) => t < "12:00"),
       afternoon: free.filter((t) => t >= "12:00"),
@@ -121,7 +125,10 @@ const api = {
       .map(toCardShape);
   },
 
-  getAppointmentById: (id) => request(`/appointments/${id}`),
+  getAppointmentById: (id) => {
+    if (!isValidId(id)) throw new Error(`Invalid appointment ID: ${id}`);
+    return request(`/appointments/${id}`);
+  },
 
   bookAppointment: async ({ specialistId, date, time }) => {
     const u = currentUser();
@@ -142,10 +149,13 @@ const api = {
     });
   },
 
-  cancelAppointment: (id) =>
-    request(`/appointments/${id}/cancel`, { method: "PATCH" }),
+  cancelAppointment: (id) => {
+    if (!isValidId(id)) throw new Error(`Invalid appointment ID: ${id}`);
+    return request(`/appointments/${id}/cancel`, { method: "PATCH" });
+  },
 
   rescheduleAppointment: (id, { date, time }) => {
+    if (!isValidId(id)) throw new Error(`Invalid appointment ID: ${id}`);
     const start = new Date(`${date}T${time}:00`);
     const end = new Date(start.getTime() + 30 * 60_000);
     return request(`/appointments/${id}/reschedule`, {
