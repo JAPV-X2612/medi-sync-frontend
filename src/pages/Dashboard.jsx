@@ -5,11 +5,20 @@ import Button from "../components/ui/Button";
 import EmptyState from "../components/ui/EmptyState";
 import Spinner from "../components/ui/Spinner";
 import { useAppointments } from "../hooks/useApi";
+import api from "../services/api";
+import { formatTodayLabel } from "../utils/time";
 
 const Dashboard = ({ setPage, user }) => {
-  const { appointments, loading, error } = useAppointments();
+  const { appointments, loading, error, refresh } = useAppointments();
 
-  const handleCancel     = (id) => console.log("TODO: cancel", id);
+  const handleCancel = async (id) => {
+    try {
+      await api.cancelAppointment(id);
+      refresh();
+    } catch (err) {
+      console.error("Failed to cancel appointment", err);
+    }
+  };
   const handleReschedule = (id) => console.log("TODO: reschedule", id);
 
   return (
@@ -37,7 +46,7 @@ const Dashboard = ({ setPage, user }) => {
 
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-slate-900">Today, Oct 24</h2>
+            <h2 className="text-lg font-bold text-slate-900">Today, {formatTodayLabel()}</h2>
           </div>
 
           {loading && (

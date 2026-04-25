@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../services/api";
 import {
   MOCK_USER,
@@ -7,8 +7,7 @@ import {
   MOCK_SLOTS,
 } from "../data/mockData";
 
-// Toggle to false when backend is ready
-const USE_MOCK = true;
+const USE_MOCK = false;
 
 export const useUser = () => {
   const [user, setUser]       = useState(null);
@@ -30,16 +29,20 @@ export const useAppointments = (date) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading]           = useState(true);
   const [error, setError]               = useState(null);
+  const [refreshIdx, setRefreshIdx]     = useState(0);
 
   useEffect(() => {
     if (USE_MOCK) { setAppointments(MOCK_APPOINTMENTS); setLoading(false); return; }
+    setLoading(true);
     api.getAppointments(date)
       .then(setAppointments)
       .catch(setError)
       .finally(() => setLoading(false));
-  }, [date]);
+  }, [date, refreshIdx]);
 
-  return { appointments, loading, error };
+  const refresh = useCallback(() => setRefreshIdx((i) => i + 1), []);
+
+  return { appointments, loading, error, refresh };
 };
 
 export const useSpecialists = (filters = {}) => {
@@ -60,13 +63,14 @@ export const useSpecialists = (filters = {}) => {
 };
 
 export const useAvailableSlots = (specialistId, date) => {
-  const [slots, setSlots]     = useState(MOCK_SLOTS);
+  const [slots, setSlots]     = useState({ morning: [], afternoon: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState(null);
 
   useEffect(() => {
     if (!specialistId || !date) { setLoading(false); return; }
     if (USE_MOCK) { setSlots(MOCK_SLOTS); setLoading(false); return; }
+    setLoading(true);
     api.getAvailableSlots(specialistId, date)
       .then(setSlots)
       .catch(setError)

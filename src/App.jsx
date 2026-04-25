@@ -1,10 +1,11 @@
 import { useState } from "react";
 import NavigationSidebar from "./components/layout/NavigationSidebar";
-import { useUser } from "./hooks/useApi";
+import { useAuth } from "./hooks/useAuth";
 import Dashboard      from "./pages/Dashboard";
 import FindSpecialist from "./pages/FindSpecialist";
 import TimeSlots      from "./pages/TimeSlots";
 import Confirmation   from "./pages/Confirmation";
+import Login          from "./pages/Login";
 
 const PAGES = {
   dashboard:    Dashboard,
@@ -14,17 +15,20 @@ const PAGES = {
 };
 
 export default function App() {
+  const { user, login, logout } = useAuth();
   const [page, setPage]                             = useState("dashboard");
   const [selectedSpecialist, setSelectedSpecialist] = useState(null);
   const [bookingData, setBookingData]               = useState(null);
 
-  const { user } = useUser();
+  if (!user) {
+    return <Login onLogin={login} />;
+  }
 
   const PageComponent = PAGES[page] ?? Dashboard;
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      <NavigationSidebar page={page} setPage={setPage} user={user} />
+      <NavigationSidebar page={page} setPage={setPage} user={user} onLogout={logout} />
       <div className="ml-56 flex-1 flex flex-col min-h-screen overflow-y-auto">
         <PageComponent
           setPage={setPage}
