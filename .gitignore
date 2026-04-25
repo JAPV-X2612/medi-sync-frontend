@@ -1,36 +1,139 @@
-# Nestjs specific
-/dist
-/node_modules
-/build
-/tmp
+# ============================================
+# ENVIRONMENT & SECRETS
+# ============================================
+.env
+.env.*
+!.env.example
+*.secret
+*.pem
+*.key
+*.p12
+*.pfx
 
-# Logs
-logs
-*.log
+# ============================================
+# NODE.JS / NPM
+# ============================================
+node_modules/
 npm-debug.log*
-pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
+.pnpm-debug.log*
+.npm
+.yarn/
+.pnp.*
+package-lock.json.bak
 
-# dotenv environment variable files
-.env
-.env.development
-.env.test
-.env.production
+# ============================================
+# VITE BUILD OUTPUT
+# ============================================
+dist/
+build/
+.vite/
 
-# temp directory
-.temp
-.tmp
+# ============================================
+# TESTING & COVERAGE
+# ============================================
+coverage/
+.nyc_output/
+test-results/
+test-output/
+junit.xml
+lcov.info
+*.lcov
 
-# IDE and editor configs
-.idea/
+# ============================================
+# LOGS
+# ============================================
+logs/
+*.log
+*.log.*
+
+# ============================================
+# CACHE
+# ============================================
+.cache/
+.eslintcache
+.stylelintcache
+.prettiercache
+.turbo/
+
+# ============================================
+# IDEs
+# ============================================
+# Visual Studio Code
 .vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.code-workspace
+.history/
 
-# Claude Code
-.claude/
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# Eclipse / Theia
+.metadata
+.classpath
+.project
+.settings/
+.recommenders/
+
+# ============================================
+# OS
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================================
+# TEMPORARY & BACKUP FILES
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.swp
+*.swo
+temp/
+tmp/
+
+# ============================================
+# VERCEL
+# ============================================
+.vercel/
+
+# ============================================
+# CLAUDE CODE
+# ============================================
+.claude/settings.local.json
