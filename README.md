@@ -158,25 +158,26 @@ deploy ── Vercel CLI → production
 
 ### Home — Your Appointments
 
-<!-- Paste screenshot here -->
+<img width="2560" height="1342" alt="image" src="https://github.com/user-attachments/assets/ea18c95a-d995-43ce-b3ce-def51cebe491" />
+
 
 ---
 
 ### Book an Appointment — Find a Specialist
 
-<!-- Paste screenshot here -->
+<img width="1600" height="844" alt="image" src="https://github.com/user-attachments/assets/6afe360b-b2fd-4c28-8612-ca7f92be9b60" />
 
 ---
 
 ### Select a Time Slot
 
-<!-- Paste screenshot here -->
+<img width="1600" height="839" alt="image" src="https://github.com/user-attachments/assets/e2f9448b-6f0f-46d0-abd0-68823fb3bf57" />
 
 ---
 
 ### Confirmation
 
-<!-- Paste screenshot here -->
+<img width="1600" height="841" alt="image" src="https://github.com/user-attachments/assets/f89e73b7-cc37-4811-935a-6ee535bca8d4" />
 
 ---
 
