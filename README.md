@@ -137,10 +137,10 @@ Key mappings:
 
 ## CI/CD Pipeline
 
-Every push to `main` triggers three sequential stages:
+Every pull request merged into `main` triggers three sequential stages:
 
 ```
-push to main
+PR merged to main
     │
     ▼
 build-and-test ── npm ci → vite build → vitest --coverage
@@ -151,13 +151,6 @@ sonarcloud ── static analysis + coverage upload
     ▼
 deploy ── Vercel CLI → production
 ```
-
----
-
-## Authors
-
-**Andrés Chavarro · Jesús Pinzón · Laura Rodríguez · Sergio Bejarano**  
-Escuela Colombiana de Ingeniería Julio Garavito
 
 ---
 
@@ -184,3 +177,10 @@ Escuela Colombiana de Ingeniería Julio Garavito
 ### Confirmation
 
 <!-- Paste screenshot here -->
+
+---
+
+## Authors
+
+**Andrés Chavarro · Jesús Pinzón · Laura Rodríguez · Sergio Bejarano**  
+Escuela Colombiana de Ingeniería Julio Garavito
