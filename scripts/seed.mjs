@@ -49,8 +49,8 @@ const SEED_DOCTORS = [
 ];
 
 const WEEK_SCHEDULES = [1, 2, 3, 4, 5].flatMap((dayOfWeek) => [
-  { dayOfWeek, startTime: "09:00", endTime: "12:00", isAvailable: true },
-  { dayOfWeek, startTime: "13:00", endTime: "17:00", isAvailable: true },
+  { dayOfWeek, startTime: "09:00", endTime: "12:00", slotDurationMin: 30 },
+  { dayOfWeek, startTime: "13:00", endTime: "17:00", slotDurationMin: 30 },
 ]);
 
 const request = async (method, path, body) => {
